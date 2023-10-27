@@ -15,6 +15,7 @@ import java.util.Date;
 public class Student extends AbstractAggregateRoot<Student> {
 
     @Id
+    @Getter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
