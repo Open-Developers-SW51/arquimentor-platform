@@ -16,4 +16,8 @@ public record StudentName(String firstName, String lastName) {
             throw new IllegalArgumentException("Last name cannot be null or blank");
         }
     }
+
+    public String getFullName(){
+        return this.firstName+ ' ' +this.lastName;
+    }
 }
