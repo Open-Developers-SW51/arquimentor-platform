@@ -1,7 +1,10 @@
 package com.arquimentor.platform.arquimentor.domain.model.valueobjects;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.UUID;
 
+@Embeddable
 public record StudentRecordId(String studentRecordId) {
     public StudentRecordId(){
         this(UUID.randomUUID().toString());
