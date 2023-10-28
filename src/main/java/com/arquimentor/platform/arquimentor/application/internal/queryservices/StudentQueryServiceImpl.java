@@ -5,9 +5,12 @@ import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByEma
 import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByIdQuery;
 import com.arquimentor.platform.arquimentor.domain.services.StudentQueryService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+@Service
 public class StudentQueryServiceImpl implements StudentQueryService {
 
     private final StudentRepository studentRepository;

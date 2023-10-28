@@ -6,11 +6,13 @@ import com.arquimentor.platform.arquimentor.domain.model.commands.CreateStudentC
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.EmailAddress;
 import com.arquimentor.platform.arquimentor.domain.services.StudentCommandService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentCommandServiceImpl implements StudentCommandService {
 
     private final StudentRepository studentRepository;
-    Student student;
+
     public StudentCommandServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
@@ -22,6 +24,8 @@ public class StudentCommandServiceImpl implements StudentCommandService {
                 .map(student -> {
                     throw new IllegalArgumentException("Studdent whit email"+ command.email()+" already exists");
                 });
+        var student = new Student(command.firstname(),command.firstname(),command.email(),command.password());
+        studentRepository.save(student);
         return student.getId();
     }
 }
