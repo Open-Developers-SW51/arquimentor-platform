@@ -5,6 +5,6 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.StudentRes
 
 public class StudentResourceFromEntityAssembler {
     public static StudentResource toResourceFromEntity(Student entity){
-        return new StudentResource(entity.getId(),entity.getStudentName(),entity.getEmailAddress());
+        return new StudentResource(entity.getId(),entity.getStudentName(),entity.getEmailAddress(),entity.getPassword());
     }
 }
