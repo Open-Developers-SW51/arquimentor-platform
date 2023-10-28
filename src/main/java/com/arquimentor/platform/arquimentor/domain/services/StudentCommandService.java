@@ -1,7 +1,7 @@
 package com.arquimentor.platform.arquimentor.domain.services;
 
-import com.arquimentor.platform.arquimentor.domain.model.commands.StudentCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.CreateStudentCommand;
 
 public interface StudentCommandService {
-    Long handle(StudentCommand command);
+    Long handle(CreateStudentCommand command);
 }

@@ -2,5 +2,5 @@ package com.arquimentor.platform.arquimentor.domain.model.commands;
 
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 
-public record StudentCommand(Student student) {
+public record CreateStudentCommand(String firstname, String lastname, String email, String password) {
 }
