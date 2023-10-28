@@ -3,12 +3,12 @@ package com.arquimentor.platform.arquimentor.application.internal.queryservices;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByEmailQuery;
 import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByIdQuery;
-import com.arquimentor.platform.arquimentor.domain.services.StudentQueriService;
+import com.arquimentor.platform.arquimentor.domain.services.StudentQueryService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
 
 import java.util.Optional;
 
-public class StudentQueryServiceImpl implements StudentQueriService {
+public class StudentQueryServiceImpl implements StudentQueryService {
 
     private final StudentRepository studentRepository;
 

@@ -6,7 +6,7 @@ import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByIdQ
 
 import java.util.Optional;
 
-public interface StudentQueriService {
+public interface StudentQueryService {
     Optional<Student> handle(GetStudentByEmailQuery query);
     Optional<Student> handle(GetStudentByIdQuery query);
 }
