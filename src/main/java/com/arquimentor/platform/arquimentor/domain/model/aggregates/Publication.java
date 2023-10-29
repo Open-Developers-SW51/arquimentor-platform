@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 
+import java.util.List;
+
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -25,9 +27,9 @@ public class Publication extends AuditableModel {
     @Setter
     @Getter
     private String description;
-    @Embedded
+
     @Getter
-    private Carousel carousel;
+    private String image;
 
     @Setter
     @Getter
@@ -42,19 +44,13 @@ public class Publication extends AuditableModel {
     @JoinColumn(name = "mentor_id")
     private Student student;
 
-    public Publication(String title,String description,Carousel carousel,String telephone){
+    public Publication(String title,String description,String image,String telephone,Student student){
         this.title=title;
         this.description=description;
-        this.carousel=carousel;
+        this.image=image;
         this.telephone=telephone;
         this.views=0;
-    }
-    public Publication(String title,String description,Carousel carousel){
-        this.title=title;
-        this.description=description;
-        this.carousel=carousel;
-        this.telephone=null;
-        this.views=0;
+        this.student=student;
     }
     public Publication(){}
 
@@ -62,6 +58,10 @@ public class Publication extends AuditableModel {
         this.views = views+1;
     }
 
-    public void addImage(String image){this.carousel.addImage(image);}
-    public void deleteImage(String image){this.carousel.deleteImage(image);}
+    /*public void addImage(String image){this.carousel.addImage(image);}
+    public void deleteImage(String image){this.carousel.deleteImage(image);}*/
+
+    /*public List<String> getCarruselString(){
+        return this.carousel.getImages();
+    }*/
 }

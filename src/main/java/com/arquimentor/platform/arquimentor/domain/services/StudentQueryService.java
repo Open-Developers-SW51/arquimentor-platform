@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface StudentQueryService {
     Optional<Student> handle(GetStudentByEmailQuery query);
     Optional<Student> handle(GetStudentByIdQuery query);
+
 }

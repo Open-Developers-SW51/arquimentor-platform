@@ -7,6 +7,7 @@ import com.arquimentor.platform.arquimentor.domain.services.StudentQueryService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -27,5 +28,10 @@ public class StudentQueryServiceImpl implements StudentQueryService {
     @Override
     public Optional<Student> handle(GetStudentByIdQuery query) {
         return studentRepository.findById(query.StudentId());
+    }
+
+
+    public List<Student> findAll(){
+        return studentRepository.findAll();
     }
 }
