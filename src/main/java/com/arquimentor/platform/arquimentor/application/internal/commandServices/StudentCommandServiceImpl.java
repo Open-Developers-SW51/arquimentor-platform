@@ -24,7 +24,7 @@ public class StudentCommandServiceImpl implements StudentCommandService {
                 .map(student -> {
                     throw new IllegalArgumentException("Studdent whit email"+ command.email()+" already exists");
                 });
-        var student = new Student(command.firstname(),command.firstname(),command.email(),command.password());
+        var student = new Student(command.firstname(),command.lastname(),command.email(),command.password());
         studentRepository.save(student);
         return student.getId();
     }
