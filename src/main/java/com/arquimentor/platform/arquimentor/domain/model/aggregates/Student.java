@@ -58,5 +58,7 @@ public class Student extends AbstractAggregateRoot<Student> {
     }
 
     public String getEmailAddress(){return this.email.address();}
-    public String getPassword(){return this.email.address();}
+    public String getPassword(){return this.password.password();}
+
+
 }
