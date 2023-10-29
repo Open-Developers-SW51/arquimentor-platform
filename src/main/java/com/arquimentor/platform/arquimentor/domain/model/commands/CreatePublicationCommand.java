@@ -1,11 +1,11 @@
 package com.arquimentor.platform.arquimentor.domain.model.commands;
 
-import com.arquimentor.platform.arquimentor.domain.model.valueobjects.Carousel;
+import java.util.List;
 
 public record CreatePublicationCommand(
         String title,
         String description,
-        String image,
+        List<String> images,
         String telephone,
         Long studentId
 ) {

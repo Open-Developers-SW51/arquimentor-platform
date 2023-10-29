@@ -1,14 +1,12 @@
 package com.arquimentor.platform.arquimentor.domain.model.aggregates;
 
-import com.arquimentor.platform.arquimentor.domain.model.valueobjects.Carousel;
-import com.arquimentor.platform.arquimentor.domain.model.valueobjects.EmailAddress;
 import com.arquimentor.platform.shared.domain.model.entities.AuditableModel;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,8 +26,9 @@ public class Publication extends AuditableModel {
     @Getter
     private String description;
 
-    @Getter
-    private String image;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String images;
 
     @Setter
     @Getter
@@ -44,10 +43,11 @@ public class Publication extends AuditableModel {
     @JoinColumn(name = "mentor_id")
     private Student student;
 
-    public Publication(String title,String description,String image,String telephone,Student student){
+
+    public Publication(String title,String description,List<String> image,String telephone,Student student){
         this.title=title;
         this.description=description;
-        this.image=image;
+        this.images=String.join(",", image);
         this.telephone=telephone;
         this.views=0;
         this.student=student;
@@ -57,11 +57,8 @@ public class Publication extends AuditableModel {
     public void incrementView(){
         this.views = views+1;
     }
+    public List<String> getImages() {
+        return Arrays.asList(images.split(","));
+    }
 
-    /*public void addImage(String image){this.carousel.addImage(image);}
-    public void deleteImage(String image){this.carousel.deleteImage(image);}*/
-
-    /*public List<String> getCarruselString(){
-        return this.carousel.getImages();
-    }*/
 }

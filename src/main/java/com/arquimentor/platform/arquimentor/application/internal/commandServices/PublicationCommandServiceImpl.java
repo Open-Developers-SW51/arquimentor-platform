@@ -24,7 +24,7 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
     public Long handle(CreatePublicationCommand command) {
         Student student = studentRepository.findById(command.studentId())
                 .orElseThrow();
-        var publication = new Publication(command.title(),command.description(),command.image(), command.telephone(),student);
+        var publication = new Publication(command.title(),command.description(),command.images(), command.telephone(),student);
         publicationRepository.save(publication);
         return publication.getId();
     }

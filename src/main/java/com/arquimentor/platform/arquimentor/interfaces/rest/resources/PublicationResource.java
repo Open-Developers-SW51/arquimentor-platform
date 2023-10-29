@@ -8,7 +8,7 @@ public record PublicationResource(
         Long id,
         String title,
         String description,
-        String image,
+        List<String> image,
         String telephone,
         Integer views,
 

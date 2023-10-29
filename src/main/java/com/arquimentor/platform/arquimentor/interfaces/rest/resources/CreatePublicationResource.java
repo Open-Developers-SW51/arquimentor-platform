@@ -5,9 +5,8 @@ import java.util.List;
 public record CreatePublicationResource (
         String title,
         String description,
-        String image,
+        List<String> image,
         String telephone,
-
         Long idStudent
 ){
 }
