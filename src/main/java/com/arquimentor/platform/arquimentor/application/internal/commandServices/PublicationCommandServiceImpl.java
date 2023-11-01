@@ -8,6 +8,7 @@ import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repos
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,6 +33,18 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
     @Override
     public Optional<Publication> handle(Long id){
         return publicationRepository.findById(id);
+    }
+
+    public List<Publication> findAll(){
+        return publicationRepository.findAll();
+    }
+
+    @Override
+    public List<Publication> findPublicationsByIdMentor(Long idMentor) {
+        var student = studentRepository.findById(idMentor);
+
+        //List<Publication> publicaciones =
+        return publicationRepository.findByStudentId(idMentor);
     }
 
 }

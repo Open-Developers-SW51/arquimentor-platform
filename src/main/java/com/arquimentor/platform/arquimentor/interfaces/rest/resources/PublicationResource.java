@@ -12,6 +12,8 @@ public record PublicationResource(
         String telephone,
         Integer views,
 
+        Integer likes,
+
         Student student
 ) {
 }
