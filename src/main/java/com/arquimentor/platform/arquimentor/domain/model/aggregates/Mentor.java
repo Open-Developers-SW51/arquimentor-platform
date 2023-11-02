@@ -15,7 +15,6 @@ public class Mentor {
     private Long id;
 
 
-    @Getter
     @Embedded
     private Subscription subscription;
 
@@ -30,4 +29,6 @@ public class Mentor {
     }
 
     public Mentor(){}
+
+    public String getSubscription(){return this.subscription.subscription();}
 }

@@ -3,12 +3,15 @@ package com.arquimentor.platform.arquimentor.application.internal.commandService
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Mentor;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CreateMentorCommand;
-import com.arquimentor.platform.arquimentor.domain.model.valueobjects.Subscription;
-import com.arquimentor.platform.arquimentor.domain.services.MentorCommandSerice;
+import com.arquimentor.platform.arquimentor.domain.services.MentorCommandService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
 
-public class MentorCommandServiceImpl implements MentorCommandSerice {
+import java.util.Optional;
+
+@Service
+public class MentorCommandServiceImpl implements MentorCommandService {
 
     private final MentorRepository mentorRepository;
     private final StudentRepository studentRepository;
@@ -22,6 +25,12 @@ public class MentorCommandServiceImpl implements MentorCommandSerice {
     public Long handle(CreateMentorCommand command) {
         Student student = studentRepository.findById(command.studentId()).orElseThrow();;
         var Mentor = new Mentor(command.subscription(),student);
-        return null;
+        mentorRepository.save(Mentor);
+        return Mentor.getId();
+    }
+
+    @Override
+    public Optional<Mentor> handle(Long idMentor) {
+        return mentorRepository.findById(idMentor);
     }
 }
