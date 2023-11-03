@@ -18,4 +18,8 @@ public interface AppointmentCommandService {
     Optional<Appointment> handle(Long appointmentId);
     List<Appointment> findAll();
 
+    List<Appointment> findAppointmentsByStudentId(Long studentId);
+
+    List<Appointment> findAppointmentsByMentorId(Long mentorId);
+
 }

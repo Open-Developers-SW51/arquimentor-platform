@@ -13,7 +13,7 @@ public interface PublicationCommandService {
     Optional<Publication> handle(Long idPublication);
     List<Publication> findAll();
 
-    List<Publication> findPublicationsByIdMentor(Long idPublication);
+    List<Publication> findPublicationsByIdMentor(Long idMentor);
 
     Optional<Publication> findPublicationById(Long idPublication);
 
