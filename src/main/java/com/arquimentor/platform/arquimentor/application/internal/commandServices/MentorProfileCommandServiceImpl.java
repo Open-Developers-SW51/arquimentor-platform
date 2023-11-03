@@ -57,7 +57,7 @@ public class MentorProfileCommandServiceImpl implements MentorProfileCommandServ
                     new PhoneNumber(command.phonenumber()),
                     command.description(),
                     new UserProfilePhoto(command.userprofilephoto()),
-                    Arrays.asList(command.certificates()),
+                    command.certificates(),
                     mentor.get()
             );
 

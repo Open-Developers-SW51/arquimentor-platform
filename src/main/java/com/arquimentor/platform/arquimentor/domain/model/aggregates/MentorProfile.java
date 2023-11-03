@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.Arrays;
 import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
@@ -60,6 +61,9 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
 
     public void updatePhoneNumber(PhoneNumber phonenumber) {
         this.phonenumber = phonenumber;
+    }
+    public List<String> getCertificates() {
+        return Arrays.asList(certificates.split(","));
     }
     public void updateUserProfilePhoto(UserProfilePhoto userprofilephoto) {
         this.userprofilephoto = userprofilephoto;
