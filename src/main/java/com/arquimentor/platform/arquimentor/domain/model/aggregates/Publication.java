@@ -13,7 +13,7 @@ import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class Publication extends AbstractAggregateRoot<Publication> {
+public class Publication extends AuditableModel{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
