@@ -82,4 +82,14 @@ public class AppointmentCommandServiceImpl implements AppointmentCommandService 
     public List<Appointment> findAll() {
         return appointmentRepository.findAll();
     }
+
+    @Override
+    public List<Appointment> findAppointmentsByStudentId(Long studentId) {
+        return appointmentRepository.findByStudentId(studentId);
+    }
+
+    @Override
+    public List<Appointment> findAppointmentsByMentorId(Long mentorId) {
+        return appointmentRepository.findByMentorId(mentorId);
+    }
 }
