@@ -1,9 +1,7 @@
 package com.arquimentor.platform.arquimentor.domain.services;
 
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Publication;
-import com.arquimentor.platform.arquimentor.domain.model.commands.CreatePublicationCommand;
-import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
-import com.arquimentor.platform.arquimentor.domain.model.commands.UpdatePublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +18,9 @@ public interface PublicationCommandService {
     Optional<Publication> updatePublicationById(UpdatePublicationCommand command);
 
     void deletePublication(DeletePublicationCommand command);
+
+    Long incrementedView(IncrementViewPublicationCommand command);
+
+    Long incrementedLike(IncrementedLikePublicationCommand command);
+
 }

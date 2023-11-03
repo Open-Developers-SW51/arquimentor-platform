@@ -1,6 +1,8 @@
 package com.arquimentor.platform.arquimentor.interfaces.rest;
 
 import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.IncrementViewPublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.IncrementedLikePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreatePublicationResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.PublicationResource;
@@ -72,5 +74,19 @@ public class PublicationsController {
         var deletePublicationCommand = new DeletePublicationCommand(publicationId);
         publicationCommandService.deletePublication(deletePublicationCommand);
         return ResponseEntity.ok("Publication with given id successfully deleted");
+    }
+
+    @PostMapping("/{publicationId}/incrementView")
+    public ResponseEntity<?> incrementViewPublication(@PathVariable Long publicationId) {
+        var incrementViewPublicationCommand = new IncrementViewPublicationCommand(publicationId);
+        var incrementViewPublicationId = publicationCommandService.incrementedView(incrementViewPublicationCommand);
+        return ResponseEntity.ok(incrementViewPublicationId);
+    }
+
+    @PostMapping("/{publicationId}/incrementLike")
+    public ResponseEntity<?> incrementLikePublication(@PathVariable Long publicationId) {
+        var incrementLikePublicationCommand = new IncrementedLikePublicationCommand(publicationId);
+        var incrementLikePublicationId = publicationCommandService.incrementedLike(incrementLikePublicationCommand);
+        return ResponseEntity.ok(incrementLikePublicationId);
     }
 }

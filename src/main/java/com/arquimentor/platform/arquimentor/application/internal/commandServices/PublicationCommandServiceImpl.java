@@ -3,9 +3,7 @@ package com.arquimentor.platform.arquimentor.application.internal.commandService
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Mentor;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Publication;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
-import com.arquimentor.platform.arquimentor.domain.model.commands.CreatePublicationCommand;
-import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
-import com.arquimentor.platform.arquimentor.domain.model.commands.UpdatePublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.*;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.PublicationRepository;
@@ -69,5 +67,27 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
             throw new IllegalArgumentException("Publication does not exist");
         }
         publicationRepository.deleteById(command.publicationId());
+    }
+
+    @Override
+    public Long incrementedView(IncrementViewPublicationCommand command) {
+        publicationRepository.findById(command.publicationId())
+                .map(publication -> {
+                    publication.incrementView();
+                    publicationRepository.save(publication);
+                    return publication.getId();
+                }).orElseThrow(()-> new RuntimeException("Publication not found"));
+        return null;
+    }
+
+    @Override
+    public Long incrementedLike(IncrementedLikePublicationCommand command) {
+        publicationRepository.findById(command.publicationId())
+                .map(publication -> {
+                    publication.incrementLike();
+                    publicationRepository.save(publication);
+                    return publication.getId();
+                }).orElseThrow(()-> new RuntimeException("Publication not found"));
+        return null;
     }
 }
