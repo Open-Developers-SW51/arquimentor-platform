@@ -32,12 +32,10 @@ public class PublicationController {
         return ResponseEntity.ok(publicationResources);
     }
 
-    @GetMapping("/{studentId}")
-    public ResponseEntity<List<PublicationResource>> getPublicationsByIdMentor(@PathVariable Long studentId) {
-        var listPublications=publicationCommandService.findPublicationsByIdMentor(studentId);
-        List<PublicationResource> publicationResources = listPublications.stream()
-                .map(PublicationEntityToResource::toResourceFromEntity)
-                .collect(Collectors.toList());
+    @GetMapping("/{publicationsId}")
+    public ResponseEntity<PublicationResource> getPublicationById(@PathVariable Long publicationsId) {
+        var publication=publicationCommandService.findPublicationById(publicationsId);
+        var publicationResources = PublicationEntityToResource.toResourceFromEntity(publication.get());
         return ResponseEntity.ok(publicationResources);
     }
     @PostMapping

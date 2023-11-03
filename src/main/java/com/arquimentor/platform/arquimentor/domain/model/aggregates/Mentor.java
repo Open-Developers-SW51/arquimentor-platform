@@ -20,7 +20,7 @@ public class Mentor {
 
     @ManyToOne
     @Getter
-    @JoinColumn(name = "mentor_id")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     public Mentor(String subscription, Student student){

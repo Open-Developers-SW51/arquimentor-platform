@@ -6,7 +6,6 @@ public record CreatePublicationResource (
         String title,
         String description,
         List<String> image,
-        String telephone,
-        Long idStudent
+        Long idMentor
 ){
 }
