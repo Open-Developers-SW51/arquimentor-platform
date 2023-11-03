@@ -31,11 +31,6 @@ public class Publication extends AbstractAggregateRoot<Publication> {
     @Column(columnDefinition = "TEXT")
     private String images;
 
-    @Setter
-    @Getter
-    private String telephone;
-
-
     @Getter
     private Integer views;
 
@@ -45,17 +40,16 @@ public class Publication extends AbstractAggregateRoot<Publication> {
     @ManyToOne
     @Getter
     @JoinColumn(name = "mentor_id")
-    private Student student;
+    private Mentor mentor;
 
 
-    public Publication(String title,String description,List<String> image,String telephone,Student student){
+    public Publication(String title,String description,List<String> image,Mentor mentor){
         this.title=title;
         this.description=description;
         this.images=String.join(",", image);
-        this.telephone=telephone;
         this.views=0;
         this.likes=0;
-        this.student=student;
+        this.mentor=mentor;
     }
     public Publication(){}
 
@@ -69,4 +63,10 @@ public class Publication extends AbstractAggregateRoot<Publication> {
         return Arrays.asList(images.split(","));
     }
 
+    public Publication updatePublication(String title,String description, String images){
+        this.title = title;
+        this.description=description;
+        this.images=images;
+        return this;
+    }
 }

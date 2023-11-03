@@ -1,13 +1,10 @@
 package com.arquimentor.platform.arquimentor.interfaces.rest;
 
-import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByIdQuery;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreatePublicationResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.PublicationResource;
-import com.arquimentor.platform.arquimentor.interfaces.rest.resources.StudentResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.transform.CreatePublicationCommandFromResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.transform.PublicationEntityToResource;
-import com.arquimentor.platform.arquimentor.interfaces.rest.transform.StudentResourceFromEntityAssembler;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,12 +32,10 @@ public class PublicationController {
         return ResponseEntity.ok(publicationResources);
     }
 
-    @GetMapping("/{studentId}")
-    public ResponseEntity<List<PublicationResource>> getPublicationsByIdMentor(@PathVariable Long studentId) {
-        var listPublications=publicationCommandService.findPublicationsByIdMentor(studentId);
-        List<PublicationResource> publicationResources = listPublications.stream()
-                .map(PublicationEntityToResource::toResourceFromEntity)
-                .collect(Collectors.toList());
+    @GetMapping("/{publicationsId}")
+    public ResponseEntity<PublicationResource> getPublicationById(@PathVariable Long publicationsId) {
+        var publication=publicationCommandService.findPublicationById(publicationsId);
+        var publicationResources = PublicationEntityToResource.toResourceFromEntity(publication.get());
         return ResponseEntity.ok(publicationResources);
     }
     @PostMapping
