@@ -1,10 +1,13 @@
 package com.arquimentor.platform.arquimentor.interfaces.rest;
 
+import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreatePublicationResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.PublicationResource;
+import com.arquimentor.platform.arquimentor.interfaces.rest.resources.UpdatePublicationResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.transform.CreatePublicationCommandFromResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.transform.PublicationEntityToResource;
+import com.arquimentor.platform.arquimentor.interfaces.rest.transform.UpdatePublicationCommandFromResource;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,9 +35,9 @@ public class PublicationController {
         return ResponseEntity.ok(publicationResources);
     }
 
-    @GetMapping("/{publicationsId}")
-    public ResponseEntity<PublicationResource> getPublicationById(@PathVariable Long publicationsId) {
-        var publication=publicationCommandService.findPublicationById(publicationsId);
+    @GetMapping("/{publicationId}")
+    public ResponseEntity<PublicationResource> getPublicationById(@PathVariable Long publicationId) {
+        var publication=publicationCommandService.findPublicationById(publicationId);
         var publicationResources = PublicationEntityToResource.toResourceFromEntity(publication.get());
         return ResponseEntity.ok(publicationResources);
     }
@@ -51,5 +54,23 @@ public class PublicationController {
 
         var studentResource = PublicationEntityToResource.toResourceFromEntity(publication.get());
         return new ResponseEntity<>(studentResource, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{publicationId}")
+    public ResponseEntity<PublicationResource> updatePublication(@PathVariable Long publicationId, @RequestBody UpdatePublicationResource updatePublicationResource) {
+        var updatePublicationCommand = UpdatePublicationCommandFromResource.toCommandFromResource(publicationId, updatePublicationResource);
+        var updatedPublication = publicationCommandService.updatePublicationById(updatePublicationCommand);
+        if (updatedPublication.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+        var publicationResource = PublicationEntityToResource.toResourceFromEntity(updatedPublication.get());
+        return ResponseEntity.ok(publicationResource);
+    }
+
+    @DeleteMapping("/{publicationId}")
+    public ResponseEntity<?> deletePublication(@PathVariable Long publicationId) {
+        var deletePublicationCommand = new DeletePublicationCommand(publicationId);
+        publicationCommandService.deletePublication(deletePublicationCommand);
+        return ResponseEntity.ok("Publication with given id successfully deleted");
     }
 }

@@ -63,10 +63,10 @@ public class Publication extends AbstractAggregateRoot<Publication> {
         return Arrays.asList(images.split(","));
     }
 
-    public Publication updatePublication(String title,String description, String images){
+    public Publication updatePublication(String title,String description, List<String> images){
         this.title = title;
         this.description=description;
-        this.images=images;
+        this.images=String.join(",", images);
         return this;
     }
 }
