@@ -4,6 +4,8 @@ import com.arquimentor.platform.arquimentor.domain.model.aggregates.Mentor;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Publication;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CreatePublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.UpdatePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.PublicationRepository;
@@ -53,4 +55,19 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
         return publicationRepository.findById(idPublication);
     }
 
+    @Override
+    public Optional<Publication> updatePublicationById(UpdatePublicationCommand command) {
+        if (!publicationRepository.existsById(command.id()))throw new IllegalArgumentException("Publication does not exist");
+        var publicationToUpdate = publicationRepository.findById(command.id()).get();
+        var updatePublication = publicationRepository.save(publicationToUpdate.updatePublication(command.title(),command.description(), command.images()));
+        return Optional.of(updatePublication);
+    }
+
+    @Override
+    public void deletePublication(DeletePublicationCommand command) {
+        if (!publicationRepository.existsById(command.publicationId())){
+            throw new IllegalArgumentException("Publication does not exist");
+        }
+        publicationRepository.deleteById(command.publicationId());
+    }
 }
