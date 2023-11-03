@@ -1,5 +1,8 @@
 package com.arquimentor.platform.arquimentor.application.internal.commandServices;
 
+import com.arquimentor.platform.arquimentor.domain.model.aggregates.Appointment;
+import com.arquimentor.platform.arquimentor.domain.model.aggregates.Mentor;
+import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CancelAppointmentCommand;
 import com.arquimentor.platform.arquimentor.domain.model.commands.ConfirmAppointmentCommand;
 import com.arquimentor.platform.arquimentor.domain.model.commands.RejectAppointmentCommand;
@@ -8,7 +11,12 @@ import com.arquimentor.platform.arquimentor.domain.services.AppointmentCommandSe
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.AppointmentRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class AppointmentCommandServiceImpl implements AppointmentCommandService {
 
     private final MentorRepository mentorRepository;
@@ -23,21 +31,55 @@ public class AppointmentCommandServiceImpl implements AppointmentCommandService 
 
     @Override
     public Long handle(RequestAppointmentCommand command) {
-        return null;
+        Student student = studentRepository.findById(command.studentId())
+                .orElseThrow();
+        Mentor mentor = mentorRepository.findById(command.mentorId())
+                .orElseThrow();
+        Appointment appointment = new Appointment(command.description(),student,mentor);
+        appointmentRepository.save(appointment);
+        return appointment.getId();
     }
 
     @Override
     public Long handle(RejectAppointmentCommand command) {
+        appointmentRepository.findById(command.appointmentId())
+                .map(appointment -> {
+                    appointment.reject();
+                    appointmentRepository.save(appointment);
+                    return appointment.getId();
+                }).orElseThrow(() -> new RuntimeException("Appointment not found"));
         return null;
     }
 
     @Override
     public Long handle(ConfirmAppointmentCommand command) {
+        appointmentRepository.findById(command.appointmentId())
+                .map(appointment -> {
+                    appointment.confirm();
+                    appointmentRepository.save(appointment);
+                    return appointment.getId();
+                }).orElseThrow(() -> new RuntimeException("Appointment not found"));
         return null;
     }
 
     @Override
     public Long handle(CancelAppointmentCommand command) {
+        appointmentRepository.findById(command.appointmentId())
+                .map(appointment -> {
+                    appointment.cancel();
+                    appointmentRepository.save(appointment);
+                    return appointment.getId();
+                }).orElseThrow(() -> new RuntimeException("Appointment not found"));
         return null;
+    }
+
+    @Override
+    public Optional<Appointment> handle(Long appointmentId) {
+        return appointmentRepository.findById(appointmentId);
+    }
+
+    @Override
+    public List<Appointment> findAll() {
+        return appointmentRepository.findAll();
     }
 }

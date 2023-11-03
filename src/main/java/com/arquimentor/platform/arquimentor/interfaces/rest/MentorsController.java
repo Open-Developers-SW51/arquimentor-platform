@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/v1/mentors", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Mentors", description = "Mentors Management Endpoints")
-public class MentorController {
+public class MentorsController {
 
     private final MentorCommandService mentorCommandSerice;
 
-    public MentorController(MentorCommandService mentorCommandSerice) {
+    public MentorsController(MentorCommandService mentorCommandSerice) {
         this.mentorCommandSerice = mentorCommandSerice;
     }
 

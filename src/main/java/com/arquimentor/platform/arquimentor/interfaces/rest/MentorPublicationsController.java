@@ -18,10 +18,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping(value = "/api/v1/mentors/{mentorId}/publications", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "Mentors")
-public class MentorPublicationController {
+public class MentorPublicationsController {
     private final PublicationCommandService publicationCommandService;
 
-    public MentorPublicationController(PublicationCommandService publicationCommandService) {
+    public MentorPublicationsController(PublicationCommandService publicationCommandService) {
         this.publicationCommandService = publicationCommandService;
     }
     @GetMapping

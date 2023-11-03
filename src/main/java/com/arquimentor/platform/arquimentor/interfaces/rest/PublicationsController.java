@@ -20,10 +20,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/publications", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Publications", description = "Student Management Endpoints")
-public class PublicationController {
+public class PublicationsController {
     private final PublicationCommandService publicationCommandService;
 
-    public PublicationController(PublicationCommandService publicationCommandService) {
+    public PublicationsController(PublicationCommandService publicationCommandService) {
         this.publicationCommandService = publicationCommandService;
     }
     @GetMapping

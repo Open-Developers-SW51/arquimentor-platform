@@ -59,5 +59,7 @@ public class Appointment extends AuditableModel {
         this.status = StatusAppointment.CANCELLED;
     }
 
-
+    public String getStatus() {
+        return this.status.name().toLowerCase();
+    }
 }

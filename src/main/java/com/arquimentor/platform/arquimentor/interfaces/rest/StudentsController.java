@@ -3,10 +3,7 @@ package com.arquimentor.platform.arquimentor.interfaces.rest;
 
 import com.arquimentor.platform.arquimentor.application.internal.commandServices.StudentCommandServiceImpl;
 import com.arquimentor.platform.arquimentor.application.internal.queryservices.StudentQueryServiceImpl;
-import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByEmailQuery;
 import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentByIdQuery;
-import com.arquimentor.platform.arquimentor.domain.services.StudentCommandService;
-import com.arquimentor.platform.arquimentor.domain.services.StudentQueryService;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreateStudentResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.resources.StudentResource;
 import com.arquimentor.platform.arquimentor.interfaces.rest.transform.CreateStudentCommandFromResourceAssembler;
@@ -24,11 +21,11 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/api/v1/students", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Students", description = "Student Management Endpoints")
-public class StudentController {
+public class StudentsController {
     private final StudentQueryServiceImpl studentQueryServiceImpl;
     private final StudentCommandServiceImpl studentCommandServiceImpl;
 
-    public StudentController(StudentQueryServiceImpl studentQueryServiceImpl, StudentCommandServiceImpl studentCommandServiceImpl) {
+    public StudentsController(StudentQueryServiceImpl studentQueryServiceImpl, StudentCommandServiceImpl studentCommandServiceImpl) {
         this.studentQueryServiceImpl = studentQueryServiceImpl;
         this.studentCommandServiceImpl = studentCommandServiceImpl;
     }
