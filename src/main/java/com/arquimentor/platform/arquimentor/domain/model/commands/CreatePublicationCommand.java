@@ -6,7 +6,6 @@ public record CreatePublicationCommand(
         String title,
         String description,
         List<String> images,
-        String telephone,
-        Long studentId
+        Long mentorId
 ) {
 }

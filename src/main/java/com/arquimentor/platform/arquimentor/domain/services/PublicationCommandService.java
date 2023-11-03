@@ -12,4 +12,6 @@ public interface PublicationCommandService {
     List<Publication> findAll();
 
     List<Publication> findPublicationsByIdMentor(Long idPublication);
+
+    Optional<Publication> findPublicationById(Long idPublication);
 }
