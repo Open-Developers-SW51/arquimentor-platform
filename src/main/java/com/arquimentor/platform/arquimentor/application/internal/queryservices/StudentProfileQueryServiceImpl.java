@@ -21,7 +21,7 @@ public class StudentProfileQueryServiceImpl implements StudentProfileQueryServic
 
     @Override
     public Optional<StudentProfile> handle(GetStudentProfileByStudentIdQuery query) {
-        // Obtén la lista de perfiles de estudiantes por ID y conviértela en un Optional
+
         List<StudentProfile> profiles = studentProfileRepository.findByStudentId(query.StudentId());
         return profiles.isEmpty() ? Optional.empty() : Optional.of(profiles.get(0));
     }
