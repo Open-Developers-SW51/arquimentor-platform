@@ -5,6 +5,6 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.Publicatio
 
 public class PublicationEntityToResource {
     public static PublicationResource toResourceFromEntity(Publication entity){
-        return new PublicationResource(entity.getId(),entity.getTitle(),entity.getDescription(),entity.getImages(),entity.getViews(),entity.getLikes(),entity.getMentor());
+        return new PublicationResource(entity.getId(),entity.getTitle(),entity.getDescription(),entity.getImages(),entity.getViews(),entity.getLikes(),entity.getMentorProfile());
     }
 }

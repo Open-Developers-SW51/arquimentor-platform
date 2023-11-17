@@ -14,5 +14,5 @@ public interface PublicationRepository extends JpaRepository<Publication, Long> 
 
     //Ya contiene el CRUD básico de una tabla
 
-    List<Publication> findByMentorId(Long idMentor);
+    List<Publication> findByMentorProfileId(Long idMentorProfile);
 }

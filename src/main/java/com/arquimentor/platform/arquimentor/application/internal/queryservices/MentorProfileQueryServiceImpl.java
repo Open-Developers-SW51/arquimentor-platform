@@ -33,9 +33,4 @@ public class MentorProfileQueryServiceImpl implements MentorProfileQueryService 
         return mentorProfileRepository.findAll();
     }
 
-
-   // @Override
-   // public Optional<StudentProfile> handle(GetStudentProfileByPhoneNumberQuery query) {
-     //   return studentProfileRepository.findStudentProfilesByPhoneNumber(query.phoneNumber());
-  //  }
  }

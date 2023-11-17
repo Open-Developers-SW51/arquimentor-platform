@@ -39,17 +39,17 @@ public class Publication extends AuditableModel{
 
     @ManyToOne
     @Getter
-    @JoinColumn(name = "mentor_id")
-    private Mentor mentor;
+    @JoinColumn(name = "mentorProfile_id")
+    private MentorProfile mentorProfile;
 
 
-    public Publication(String title,String description,List<String> image,Mentor mentor){
+    public Publication(String title,String description,List<String> image,MentorProfile mentorProfile){
         this.title=title;
         this.description=description;
         this.images=String.join(",", image);
         this.views=0;
         this.likes=0;
-        this.mentor=mentor;
+        this.mentorProfile=mentorProfile;
     }
     public Publication(){}
 
