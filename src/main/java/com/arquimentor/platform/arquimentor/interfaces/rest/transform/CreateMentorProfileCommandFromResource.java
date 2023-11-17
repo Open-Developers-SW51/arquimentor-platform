@@ -8,11 +8,10 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreateStud
 
 public class CreateMentorProfileCommandFromResource {
     public static CreateMentorProfileCommand resourceToCommand(CreateMentorProfileResource resource) {
-        PhoneNumber phoneNumber = resource.phonenumber();
         return new CreateMentorProfileCommand(
-                phoneNumber.phonenumber(), // Accede directamente al campo 'phonenumber'
+                resource.phoneNumber(), // Accede directamente al campo 'phonenumber'
                 resource.description(),
-                resource.userprofilephoto().imageUrl(),
+                resource.userProfilePhoto(),
                 resource.certificates(),
                 resource.idMentor()
         );

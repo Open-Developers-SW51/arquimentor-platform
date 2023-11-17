@@ -23,4 +23,6 @@ public interface PublicationCommandService {
 
     Long incrementedLike(IncrementedLikePublicationCommand command);
 
+    Long discountLike(IncrementedLikePublicationCommand command);
+
 }

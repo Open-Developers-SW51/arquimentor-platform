@@ -7,9 +7,9 @@ import java.util.List;
 
 public record CreateMentorProfileResource(
 
-        PhoneNumber phonenumber,
+        String phoneNumber,
         String description,
-        UserProfilePhoto userprofilephoto,
+        String userProfilePhoto,
         List<String> certificates,
         Long idMentor
 ) {

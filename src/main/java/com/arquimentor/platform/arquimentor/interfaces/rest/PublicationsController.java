@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/v1/publications", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Publications", description = "Student Management Endpoints")
@@ -44,7 +45,9 @@ public class PublicationsController {
         return ResponseEntity.ok(publicationResources);
     }
     @PostMapping
-    public ResponseEntity<PublicationResource> createPublication(@RequestBody CreatePublicationResource resource) {
+    public ResponseEntity<PublicationResource> createPublication(
+            @RequestBody CreatePublicationResource resource
+    ) {
         var CreatePublicationCommand = CreatePublicationCommandFromResource.resourceToCommand(resource);
         var publicationId = publicationCommandService.handle(CreatePublicationCommand);
         if (publicationId == 0L) {
@@ -87,6 +90,13 @@ public class PublicationsController {
     public ResponseEntity<?> incrementLikePublication(@PathVariable Long publicationId) {
         var incrementLikePublicationCommand = new IncrementedLikePublicationCommand(publicationId);
         var incrementLikePublicationId = publicationCommandService.incrementedLike(incrementLikePublicationCommand);
+        return ResponseEntity.ok(incrementLikePublicationId);
+    }
+
+    @PostMapping("/{publicationId}/discountLike")
+    public ResponseEntity<?> discountLikePublication(@PathVariable Long publicationId) {
+        var incrementLikePublicationCommand = new IncrementedLikePublicationCommand(publicationId);
+        var incrementLikePublicationId = publicationCommandService.discountLike(incrementLikePublicationCommand);
         return ResponseEntity.ok(incrementLikePublicationId);
     }
 }

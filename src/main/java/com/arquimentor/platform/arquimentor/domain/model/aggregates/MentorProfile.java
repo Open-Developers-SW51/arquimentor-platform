@@ -22,7 +22,6 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
 
 
     @Setter
-    @Getter
     @Embedded
     private PhoneNumber phonenumber;
 
@@ -32,8 +31,8 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String certificates;
+
     @Setter
-    @Getter
     @Embedded
     private UserProfilePhoto userprofilephoto;
 
@@ -59,8 +58,8 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
         return this;
     }
 
-    public void updatePhoneNumber(PhoneNumber phonenumber) {
-        this.phonenumber = phonenumber;
+    public void updatePhoneNumber(String phonenumber) {
+        this.phonenumber = new PhoneNumber(phonenumber);
     }
     public List<String> getCertificates() {
         return Arrays.asList(certificates.split(","));
@@ -68,4 +67,11 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     public void updateUserProfilePhoto(UserProfilePhoto userprofilephoto) {
         this.userprofilephoto = userprofilephoto;
     }
+    public String getPhoneNumber(){
+        return this.phonenumber.phonenumber();
+    }
+    public  String getUserProfilePhoto(){
+        return this.userprofilephoto.imageUrl();
+    }
+
 }

@@ -47,9 +47,10 @@ public class StudentProfileCommandServiceImpl implements StudentProfileCommandSe
 
         if (student.isPresent()) {
             StudentProfile studentProfile = new StudentProfile(
-                    new PhoneNumber(command.phonenumber()),
-                    command.description(),
-                    new UserProfilePhoto(command.userprofilephoto()),
+                    command.nick(),
+                    command.phonenumber(),
+                    command.slogan(),
+                    command.userprofilephoto(),
                     student.get()
             );
 
@@ -70,12 +71,12 @@ public class StudentProfileCommandServiceImpl implements StudentProfileCommandSe
                 updatedProfile.updatePhoneNumber(command.phonenumber());
             }
 
-            if (command.description() != null) {
-                updatedProfile.updateDescription(command.description());
+            if (command.slogan() != null) {
+                updatedProfile.updateSlogan(command.slogan());
             }
 
             if (command.userprofilephoto() != null) {
-                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto().imageUrl()));
+                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto()));
             }
 
             StudentProfile savedProfile = studentProfileRepository.save(updatedProfile);

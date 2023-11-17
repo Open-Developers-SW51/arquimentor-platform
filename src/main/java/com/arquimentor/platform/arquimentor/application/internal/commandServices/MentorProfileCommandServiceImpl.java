@@ -83,7 +83,7 @@ public class MentorProfileCommandServiceImpl implements MentorProfileCommandServ
             }
 
             if (command.userprofilephoto() != null) {
-                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto().imageUrl()));
+                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto()));
             }
 
             MentorProfile savedProfile = mentorProfileRepository.save(updatedProfile);
