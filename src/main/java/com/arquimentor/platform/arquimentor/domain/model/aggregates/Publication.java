@@ -59,6 +59,9 @@ public class Publication extends AuditableModel{
     public void incrementLike(){
         this.likes = likes+1;
     }
+    public void discountLike(){
+        this.likes = likes-1;
+    }
     public List<String> getImages() {
         return Arrays.asList(images.split(","));
     }

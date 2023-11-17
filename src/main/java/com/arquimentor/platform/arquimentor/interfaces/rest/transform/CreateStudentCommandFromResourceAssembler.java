@@ -5,6 +5,10 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreateStud
 
 public class CreateStudentCommandFromResourceAssembler {
     public static CreateStudentCommand toCommandFromResource(CreateStudentResource resource){
-        return new CreateStudentCommand(resource.firstName(),resource.lastname(),resource.email(),resource.password());
+        return new CreateStudentCommand(
+                resource.firstName(),
+                resource.lastname(),
+                resource.email(),
+                resource.password());
     }
 }

@@ -20,20 +20,22 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     @Getter
     private Long id;
 
-
     @Setter
     @Getter
+    private String nick;
+
+    @Setter
     @Embedded
     private PhoneNumber phonenumber;
 
     @Setter
     @Getter
-    private String description;
+    private String slogan;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String certificates;
+
     @Setter
-    @Getter
     @Embedded
     private UserProfilePhoto userprofilephoto;
 
@@ -45,22 +47,23 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     private Mentor mentor;
 
 
-    public MentorProfile(PhoneNumber phonenumber, String description, UserProfilePhoto userprofilephoto, List<String> certificates, Mentor mentor){
-        this.phonenumber=phonenumber;
-        this.description=description;
-        this.userprofilephoto= userprofilephoto;
+    public MentorProfile(String nick,String phonenumber, String slogan, String userprofilephoto, List<String> certificates, Mentor mentor){
+        this.nick=nick;
+        this.phonenumber=new PhoneNumber(phonenumber);
+        this.slogan=slogan;
+        this.userprofilephoto= new UserProfilePhoto(userprofilephoto);
         this.certificates=String.join(",", certificates);
         this.mentor=mentor;
     }
     public MentorProfile(){}
 
-    public MentorProfile updateDescription(String description){
-        this.description=description;
+    public MentorProfile updateDescription(String slogan){
+        this.slogan=slogan;
         return this;
     }
 
-    public void updatePhoneNumber(PhoneNumber phonenumber) {
-        this.phonenumber = phonenumber;
+    public void updatePhoneNumber(String phonenumber) {
+        this.phonenumber = new PhoneNumber(phonenumber);
     }
     public List<String> getCertificates() {
         return Arrays.asList(certificates.split(","));
@@ -68,4 +71,11 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     public void updateUserProfilePhoto(UserProfilePhoto userprofilephoto) {
         this.userprofilephoto = userprofilephoto;
     }
+    public String getPhoneNumber(){
+        return this.phonenumber.phonenumber();
+    }
+    public  String getUserProfilePhoto(){
+        return this.userprofilephoto.imageUrl();
+    }
+
 }

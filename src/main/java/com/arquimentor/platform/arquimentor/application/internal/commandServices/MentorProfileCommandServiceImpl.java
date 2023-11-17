@@ -54,9 +54,10 @@ public class MentorProfileCommandServiceImpl implements MentorProfileCommandServ
 
         if (mentor.isPresent()) {
             MentorProfile mentorProfile = new MentorProfile(
-                    new PhoneNumber(command.phonenumber()),
-                    command.description(),
-                    new UserProfilePhoto(command.userprofilephoto()),
+                    command.nick(),
+                    command.phonenumber(),
+                    command.slogan(),
+                    command.userprofilephoto(),
                     command.certificates(),
                     mentor.get()
             );
@@ -78,12 +79,12 @@ public class MentorProfileCommandServiceImpl implements MentorProfileCommandServ
                 updatedProfile.updatePhoneNumber(command.phonenumber());
             }
 
-            if (command.description() != null) {
-                updatedProfile.updateDescription(command.description());
+            if (command.slogan() != null) {
+                updatedProfile.updateDescription(command.slogan());
             }
 
             if (command.userprofilephoto() != null) {
-                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto().imageUrl()));
+                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto()));
             }
 
             MentorProfile savedProfile = mentorProfileRepository.save(updatedProfile);

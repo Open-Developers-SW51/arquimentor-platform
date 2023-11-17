@@ -8,10 +8,10 @@ import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfil
 import java.util.List;
 
 public record UpdateMentorProfileResource(
-
-        PhoneNumber phonenumber,
-        String description,
-        UserProfilePhoto userprofilephoto,
+        String nick,
+        String phonenumber,
+        String slogan,
+        String userprofilephoto,
         List<String> certificates
 
 ) {

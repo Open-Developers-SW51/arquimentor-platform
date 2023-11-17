@@ -6,10 +6,10 @@ import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfil
 import java.util.List;
 
 public record CreateMentorProfileResource(
-
-        PhoneNumber phonenumber,
-        String description,
-        UserProfilePhoto userprofilephoto,
+        String nick,
+        String phoneNumber,
+        String slogan,
+        String userProfilePhoto,
         List<String> certificates,
         Long idMentor
 ) {

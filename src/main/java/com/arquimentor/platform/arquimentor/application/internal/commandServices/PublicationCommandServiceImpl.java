@@ -90,4 +90,15 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
                 }).orElseThrow(()-> new RuntimeException("Publication not found"));
         return null;
     }
+
+    @Override
+    public Long discountLike(IncrementedLikePublicationCommand command) {
+        publicationRepository.findById(command.publicationId())
+                .map(publication -> {
+                    publication.discountLike();
+                    publicationRepository.save(publication);
+                    return publication.getId();
+                }).orElseThrow(()-> new RuntimeException("Publication not found"));
+        return null;
+    }
 }

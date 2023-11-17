@@ -17,20 +17,21 @@ public class StudentProfile extends AbstractAggregateRoot<StudentProfile> {
     @Getter
     private Long id;
 
-
     @Setter
     @Getter
+    private String nick;
+
+    @Setter
     @Embedded
-    private PhoneNumber phonenumber;
+    private PhoneNumber phoneNumber;
 
     @Setter
     @Getter
-    private String description;
+    private String slogan;
 
     @Setter
-    @Getter
     @Embedded
-    private UserProfilePhoto userprofilephoto;
+    private UserProfilePhoto userProfilePhoto;
 
 
 
@@ -40,22 +41,29 @@ public class StudentProfile extends AbstractAggregateRoot<StudentProfile> {
     private Student student;
 
 
-    public StudentProfile(PhoneNumber phonenumber, String description, UserProfilePhoto userprofilephoto, Student student){
-        this.phonenumber=phonenumber;
-        this.description=description;
-        this.userprofilephoto= userprofilephoto;
+    public StudentProfile(String nick,String phoneNumber, String slogan, String userProfilePhoto, Student student){
+        this.nick=nick;
+        this.phoneNumber=new PhoneNumber(phoneNumber);
+        this.slogan=slogan;
+        this.userProfilePhoto= new UserProfilePhoto(userProfilePhoto);
         this.student=student;
     }
     public StudentProfile(){}
 
-    public StudentProfile updateDescription(String description){
-        this.description=description;
+    public StudentProfile updateSlogan(String slogan){
+        this.slogan=slogan;
         return this;
     }
-    public void updatePhoneNumber(PhoneNumber phonenumber) {
-        this.phonenumber = phonenumber;
+    public void updatePhoneNumber(String phonenumber) {
+        this.phoneNumber = new PhoneNumber(phonenumber);
     }
-    public void updateUserProfilePhoto(UserProfilePhoto userprofilephoto) {
-        this.userprofilephoto = userprofilephoto;
+    public void updateUserProfilePhoto(UserProfilePhoto userProfilePhoto) {
+        this.userProfilePhoto = userProfilePhoto;
+    }
+    public String getPhoneNumber(){
+        return this.phoneNumber.phonenumber();
+    }
+    public  String getUserProfilePhoto(){
+        return this.userProfilePhoto.imageUrl();
     }
 }

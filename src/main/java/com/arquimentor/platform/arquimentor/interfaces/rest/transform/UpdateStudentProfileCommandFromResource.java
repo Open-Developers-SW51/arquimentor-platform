@@ -7,9 +7,10 @@ public class UpdateStudentProfileCommandFromResource {
     public static UpdateStudentProfileCommand toCommandFromResource(Long studentProfileId, UpdateStudentProfileResource resource) {
 
         return new UpdateStudentProfileCommand(
+                resource.nick(),
                 studentProfileId,
                 resource.phonenumber(),
-                resource.description(),
+                resource.slogan(),
                 resource.userprofilephoto()
         );
     }

@@ -8,9 +8,10 @@ import java.util.List;
 public record UpdateMentorProfileCommand(
 
         Long id,
-        PhoneNumber phonenumber,
-        String description,
-        UserProfilePhoto userprofilephoto,
+        String nick,
+        String phonenumber,
+        String slogan,
+        String userprofilephoto,
         List<String> certificates
 ) {
 }
