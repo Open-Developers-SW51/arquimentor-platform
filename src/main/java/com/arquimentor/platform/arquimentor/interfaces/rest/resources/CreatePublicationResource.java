@@ -6,6 +6,6 @@ public record CreatePublicationResource (
         String title,
         String description,
         List<String> image,
-        Long idMentor
+        Long mentorProfileId
 ){
 }

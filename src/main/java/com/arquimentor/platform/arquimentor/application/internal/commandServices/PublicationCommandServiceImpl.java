@@ -1,13 +1,11 @@
 package com.arquimentor.platform.arquimentor.application.internal.commandServices;
 
-import com.arquimentor.platform.arquimentor.domain.model.aggregates.Mentor;
+import com.arquimentor.platform.arquimentor.domain.model.aggregates.MentorProfile;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Publication;
-import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.commands.*;
 import com.arquimentor.platform.arquimentor.domain.services.PublicationCommandService;
-import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorRepository;
+import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.MentorProfileRepository;
 import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.PublicationRepository;
-import com.arquimentor.platform.arquimentor.infrastructure.persistence.jpa.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,18 +14,17 @@ import java.util.Optional;
 @Service
 public class PublicationCommandServiceImpl implements PublicationCommandService {
     private final PublicationRepository publicationRepository;
-    private final MentorRepository mentorRepository;
-    public PublicationCommandServiceImpl(PublicationRepository publicationRepository, MentorRepository mentorRepository) {
+    private final MentorProfileRepository mentorProfileRepository;
+    public PublicationCommandServiceImpl(PublicationRepository publicationRepository, MentorProfileRepository mentorProfileRepository) {
         this.publicationRepository = publicationRepository;
-        this.mentorRepository = mentorRepository;
+        this.mentorProfileRepository = mentorProfileRepository;
     }
 
 
     @Override
     public Long handle(CreatePublicationCommand command) {
-        Mentor mentor = mentorRepository.findById(command.mentorId())
-                .orElseThrow();
-        var publication = new Publication(command.title(),command.description(),command.images(),mentor);
+        MentorProfile mentorProfile = mentorProfileRepository.findById(command.mentorProfileId()).orElseThrow();
+        var publication = new Publication(command.title(),command.description(),command.images(),mentorProfile);
         publicationRepository.save(publication);
         return publication.getId();
     }
@@ -43,9 +40,9 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
     }
 
     @Override
-    public List<Publication> findPublicationsByIdMentor(Long idMentor) {
+    public List<Publication> findPublicationsByIdMentor(Long findByMentorProfileId) {
 
-        return publicationRepository.findByMentorId(idMentor);
+        return publicationRepository.findByMentorProfileId(findByMentorProfileId);
     }
 
     @Override

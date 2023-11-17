@@ -5,6 +5,6 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.CreatePubl
 
 public class CreatePublicationCommandFromResource {
     public static CreatePublicationCommand resourceToCommand(CreatePublicationResource resource){
-        return new CreatePublicationCommand(resource.title(),resource.description(), resource.image(),resource.idMentor());
+        return new CreatePublicationCommand(resource.title(),resource.description(), resource.image(),resource.mentorProfileId());
     }
 }
