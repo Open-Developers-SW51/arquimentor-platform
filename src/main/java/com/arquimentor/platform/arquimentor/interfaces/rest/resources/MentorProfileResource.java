@@ -9,6 +9,7 @@ import java.util.List;
 
 public record MentorProfileResource(
         Long id,
+        String nick,
         String phonenumber,
         String description,
         String userprofilephoto,

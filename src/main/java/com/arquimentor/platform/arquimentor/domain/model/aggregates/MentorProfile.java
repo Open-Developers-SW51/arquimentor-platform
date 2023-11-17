@@ -20,6 +20,9 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     @Getter
     private Long id;
 
+    @Setter
+    @Getter
+    private String nick;
 
     @Setter
     @Embedded
@@ -27,7 +30,7 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
 
     @Setter
     @Getter
-    private String description;
+    private String slogan;
     @Lob
     @Column(columnDefinition = "TEXT")
     private String certificates;
@@ -44,17 +47,18 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     private Mentor mentor;
 
 
-    public MentorProfile(PhoneNumber phonenumber, String description, UserProfilePhoto userprofilephoto, List<String> certificates, Mentor mentor){
-        this.phonenumber=phonenumber;
-        this.description=description;
-        this.userprofilephoto= userprofilephoto;
+    public MentorProfile(String nick,String phonenumber, String slogan, String userprofilephoto, List<String> certificates, Mentor mentor){
+        this.nick=nick;
+        this.phonenumber=new PhoneNumber(phonenumber);
+        this.slogan=slogan;
+        this.userprofilephoto= new UserProfilePhoto(userprofilephoto);
         this.certificates=String.join(",", certificates);
         this.mentor=mentor;
     }
     public MentorProfile(){}
 
-    public MentorProfile updateDescription(String description){
-        this.description=description;
+    public MentorProfile updateDescription(String slogan){
+        this.slogan=slogan;
         return this;
     }
 

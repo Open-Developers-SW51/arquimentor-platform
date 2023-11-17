@@ -9,8 +9,9 @@ public class MentorProfileEntityToResource {
     public static MentorProfileResource toResourceFromEntity(MentorProfile entity) {
         return new MentorProfileResource(
                 entity.getId(),
+                entity.getNick(),
                 entity.getPhoneNumber(),
-                entity.getDescription(),
+                entity.getSlogan(),
                 entity.getUserProfilePhoto(),
                 entity.getCertificates(),
                 entity.getMentor()

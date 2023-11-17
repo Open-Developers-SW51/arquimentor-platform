@@ -10,8 +10,9 @@ public class UpdateMentorProfileCommandFromResource {
 
         return new UpdateMentorProfileCommand(
                 mentorProfileId,
+                resource.nick(),
                 resource.phonenumber(),
-                resource.description(),
+                resource.slogan(),
                 resource.userprofilephoto(),
                 resource.certificates()
         );
