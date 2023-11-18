@@ -1,11 +1,12 @@
 package com.arquimentor.platform.security.infrastructure.hashing.bcrypt.services;
 
 import com.arquimentor.platform.security.application.internal.outboundservices.hashing.HashingService;
+import com.arquimentor.platform.security.infrastructure.hashing.bcrypt.BCryptHashingService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class HashingServiceImpl implements HashingService {
+public class HashingServiceImpl implements BCryptHashingService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public HashingServiceImpl() {
