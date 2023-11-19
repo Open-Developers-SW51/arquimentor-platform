@@ -30,6 +30,11 @@ public class StudentQueryServiceImpl implements StudentQueryService {
         return studentRepository.findById(query.StudentId());
     }
 
+    @Override
+    public Optional<Student> porId(Long id) {
+        return studentRepository.findById(id);
+    }
+
 
     public List<Student> findAll(){
         return studentRepository.findAll();

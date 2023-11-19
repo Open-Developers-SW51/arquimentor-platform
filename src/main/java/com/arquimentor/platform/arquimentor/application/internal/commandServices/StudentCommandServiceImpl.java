@@ -19,11 +19,11 @@ public class StudentCommandServiceImpl implements StudentCommandService {
 
     @Override
     public Long handle(CreateStudentCommand command) {
-        var emailAddress = new EmailAddress(command.email());
+        /*var emailAddress = new EmailAddress(command.email());
         studentRepository.findByEmail(emailAddress)
                 .map(student -> {
                     throw new IllegalArgumentException("Studdent whit email"+ command.email()+" already exists");
-                });
+                });*/
         var student = new Student(command.firstname(),command.lastname(),command.email(),command.password());
         studentRepository.save(student);
         return student.getId();

@@ -50,8 +50,7 @@ public class StudentsController {
 
     @GetMapping("/{studentId}")
     public ResponseEntity<StudentResource> getStudentById(@PathVariable Long studentId) {
-        var getStudentByIdQuery = new GetStudentByIdQuery(studentId);
-        var student = studentQueryServiceImpl.handle(getStudentByIdQuery);
+        var student = studentQueryServiceImpl.porId(studentId);
         if (student.isEmpty()) return ResponseEntity.badRequest().build();
         var studentResource = StudentResourceFromEntityAssembler.toResourceFromEntity(student.get());
         return ResponseEntity.ok(studentResource);
