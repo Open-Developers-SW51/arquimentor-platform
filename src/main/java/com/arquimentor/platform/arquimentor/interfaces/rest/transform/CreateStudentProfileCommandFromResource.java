@@ -8,9 +8,9 @@ public class CreateStudentProfileCommandFromResource {
     public static CreateStudentProfileCommand resourceToCommand(CreateStudentProfileResource resource) {
         return new CreateStudentProfileCommand(
                 resource.nick(),
-                resource.phonenumber(), // Accede directamente al campo 'phonenumber'
+                resource.phoneNumber(), // Accede directamente al campo 'phonenumber'
                 resource.slogan(),
-                resource.userprofilephoto(),
+                resource.userProfilePhoto(),
                 resource.idStudent()
         );
     }
