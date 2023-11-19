@@ -6,12 +6,11 @@ import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfil
 import java.util.List;
 
 public record UpdateMentorProfileCommand(
-
         Long id,
         String nick,
-        String phonenumber,
+        String phoneNumber,
         String slogan,
-        String userprofilephoto,
+        String userProfilePhoto,
         List<String> certificates
 ) {
 }

@@ -9,9 +9,9 @@ import java.util.List;
 
 public record UpdateMentorProfileResource(
         String nick,
-        String phonenumber,
+        String phoneNumber,
         String slogan,
-        String userprofilephoto,
+        String userProfilePhoto,
         List<String> certificates
 
 ) {

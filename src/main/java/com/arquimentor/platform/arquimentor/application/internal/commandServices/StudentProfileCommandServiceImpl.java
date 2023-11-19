@@ -4,6 +4,7 @@ package com.arquimentor.platform.arquimentor.application.internal.commandService
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.Student;
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.StudentProfile;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CreateStudentProfileCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.model.commands.UpdateStudentProfileCommand;
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.PhoneNumber;
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfilePhoto;
@@ -66,7 +67,7 @@ public class StudentProfileCommandServiceImpl implements StudentProfileCommandSe
 
         if (existingProfile.isPresent()) {
             StudentProfile updatedProfile = existingProfile.get();
-
+            updatedProfile.updateNick(command.nick());
             if (command.phonenumber() != null) {
                 updatedProfile.updatePhoneNumber(command.phonenumber());
             }
@@ -85,5 +86,10 @@ public class StudentProfileCommandServiceImpl implements StudentProfileCommandSe
             // Maneja el caso en el que no se encuentra el perfil a actualizar
             return Optional.empty();
         }
+    }
+
+    @Override
+    public void deletePublication(DeletePublicationCommand deletePublicationCommand) {
+        studentProfileRepository.deleteById(deletePublicationCommand.publicationId());
     }
 }

@@ -1,6 +1,7 @@
 package com.arquimentor.platform.arquimentor.domain.model.aggregates;
 
 
+import com.arquimentor.platform.arquimentor.domain.model.commands.UpdateMentorProfileCommand;
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.PhoneNumber;
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfilePhoto;
 import jakarta.persistence.*;
@@ -77,5 +78,17 @@ public class MentorProfile extends AbstractAggregateRoot<MentorProfile> {
     public  String getUserProfilePhoto(){
         return this.userprofilephoto.imageUrl();
     }
+    public void updateNick(String nick) {
+        this.nick = nick;
+    }
 
+    public MentorProfile updateMentorProfile(String nick,String phoneNumber, String slogan, String userProfilePhoto, List<String> certificates){
+        this.nick=nick;
+        this.phonenumber=new PhoneNumber(phoneNumber);
+        this.slogan=slogan;
+        this.userprofilephoto= new UserProfilePhoto(userProfilePhoto);
+        this.certificates=String.join(",", certificates);
+        return this;
+
+    }
 }

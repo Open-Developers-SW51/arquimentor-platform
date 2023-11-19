@@ -2,6 +2,7 @@ package com.arquimentor.platform.arquimentor.interfaces.rest;
 
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.StudentProfile;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CreateStudentProfileCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.model.commands.UpdateStudentProfileCommand;
 import com.arquimentor.platform.arquimentor.domain.model.queries.GetStudentProfileByStudentIdQuery;
 import com.arquimentor.platform.arquimentor.domain.services.StudentProfileCommandService;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/v1/studentprofiles", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Student Profiles", description = "Student Profile Management Endpoints")
@@ -41,8 +42,6 @@ public class StudentProfileController {
         Long createdStudentProfileId = studentProfileCommandService.handle(command);
 
         if (createdStudentProfileId != null) {
-
-            var getStudentProfileByStudentIdQuery = new GetStudentProfileByStudentIdQuery(createdStudentProfileId);
             Optional<StudentProfile> createdProfile = studentProfileCommandService.handle(createdStudentProfileId);
 
             if (createdProfile.isPresent()) {
@@ -94,5 +93,12 @@ public class StudentProfileController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{studentProfileId}")
+    public ResponseEntity<?> deletePublication(@PathVariable Long studentProfileId) {
+        var deletePublicationCommand = new DeletePublicationCommand(studentProfileId);
+        studentProfileCommandService.deletePublication(deletePublicationCommand);
+        return ResponseEntity.ok("Student profile with given id successfully deleted");
     }
 }

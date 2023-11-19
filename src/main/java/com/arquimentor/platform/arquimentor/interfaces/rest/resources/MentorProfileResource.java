@@ -10,9 +10,9 @@ import java.util.List;
 public record MentorProfileResource(
         Long id,
         String nick,
-        String phonenumber,
-        String description,
-        String userprofilephoto,
+        String phoneNumber,
+        String slogan,
+        String userProfilePhoto,
         List<String> certificates,
 
         Mentor mentor

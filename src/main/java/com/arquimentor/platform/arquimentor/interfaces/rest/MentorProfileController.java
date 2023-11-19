@@ -44,7 +44,6 @@ public class MentorProfileController {
 
         if (createdMentorProfileId != null) {
 
-            var getStudentProfileByStudentIdQuery = new GetStudentProfileByStudentIdQuery(createdMentorProfileId);
             Optional<MentorProfile> createdProfile = mentorProfileCommandService.handle(createdMentorProfileId);
 
             if (createdProfile.isPresent()) {

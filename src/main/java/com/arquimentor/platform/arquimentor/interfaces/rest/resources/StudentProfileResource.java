@@ -5,8 +5,9 @@ import com.arquimentor.platform.arquimentor.domain.model.valueobjects.PhoneNumbe
 import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfilePhoto;
 
 public record StudentProfileResource(
-        String nick,
+
         Long id,
+        String nick,
         String phoneNumber,
         String slogan,
         String userProfilePhoto,
