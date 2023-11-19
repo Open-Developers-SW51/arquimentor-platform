@@ -54,7 +54,9 @@ public class PublicationCommandServiceImpl implements PublicationCommandService 
     public Optional<Publication> updatePublicationById(UpdatePublicationCommand command) {
         if (!publicationRepository.existsById(command.id()))throw new IllegalArgumentException("Publication does not exist");
         var publicationToUpdate = publicationRepository.findById(command.id()).get();
-        var updatePublication = publicationRepository.save(publicationToUpdate.updatePublication(command.title(),command.description(), command.images()));
+        var updatePublication = publicationRepository.save(publicationToUpdate.updatePublication(
+                command.title(),command.description(), command.images())
+        );
         return Optional.of(updatePublication);
     }
 

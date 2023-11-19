@@ -66,4 +66,8 @@ public class StudentProfile extends AbstractAggregateRoot<StudentProfile> {
     public  String getUserProfilePhoto(){
         return this.userProfilePhoto.imageUrl();
     }
+
+    public void updateNick(String nick) {
+        this.nick = nick;
+    }
 }

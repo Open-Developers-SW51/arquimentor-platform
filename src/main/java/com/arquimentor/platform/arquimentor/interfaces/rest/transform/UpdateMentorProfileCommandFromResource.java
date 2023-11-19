@@ -11,9 +11,9 @@ public class UpdateMentorProfileCommandFromResource {
         return new UpdateMentorProfileCommand(
                 mentorProfileId,
                 resource.nick(),
-                resource.phonenumber(),
+                resource.phoneNumber(),
                 resource.slogan(),
-                resource.userprofilephoto(),
+                resource.userProfilePhoto(),
                 resource.certificates()
         );
     }

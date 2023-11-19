@@ -6,8 +6,8 @@ import com.arquimentor.platform.arquimentor.interfaces.rest.resources.StudentPro
 public class StudentProfileEntityToResource {
     public static StudentProfileResource toResourceFromEntity(StudentProfile entity) {
         return new StudentProfileResource(
-                entity.getNick(),
                 entity.getId(),
+                entity.getNick(),
                 entity.getPhoneNumber(),
                 entity.getSlogan(),
                 entity.getUserProfilePhoto(),

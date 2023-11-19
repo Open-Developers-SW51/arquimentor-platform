@@ -73,21 +73,14 @@ public class MentorProfileCommandServiceImpl implements MentorProfileCommandServ
         Optional<MentorProfile> existingProfile = mentorProfileRepository.findById(command.id());
 
         if (existingProfile.isPresent()) {
-            MentorProfile updatedProfile = existingProfile.get();
-
-            if (command.phonenumber() != null) {
-                updatedProfile.updatePhoneNumber(command.phonenumber());
-            }
-
-            if (command.slogan() != null) {
-                updatedProfile.updateDescription(command.slogan());
-            }
-
-            if (command.userprofilephoto() != null) {
-                updatedProfile.updateUserProfilePhoto(new UserProfilePhoto(command.userprofilephoto()));
-            }
-
-            MentorProfile savedProfile = mentorProfileRepository.save(updatedProfile);
+            var mentorProfileToUpdate = mentorProfileRepository.findById(command.id()).get();
+            MentorProfile savedProfile = mentorProfileRepository.save(mentorProfileToUpdate.updateMentorProfile(
+                    command.nick(),
+                    command.phoneNumber(),
+                    command.slogan(),
+                    command.userProfilePhoto(),
+                    command.certificates()
+            ));
             return Optional.of(savedProfile);
         } else {
             // Maneja el caso en el que no se encuentra el perfil a actualizar

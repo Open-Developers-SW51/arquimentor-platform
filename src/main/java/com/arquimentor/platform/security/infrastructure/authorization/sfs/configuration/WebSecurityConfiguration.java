@@ -61,12 +61,22 @@ public class WebSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfigurer -> csrfConfigurer.disable())
-                .cors(corsConfigurer -> corsConfigurer.disable())
+                .cors(corsConfigurer -> corsConfigurer
+                        .configurationSource(request -> {
+                            var cors = new org.springframework.web.cors.CorsConfiguration();
+                            cors.setAllowedOrigins(java.util.List.of("http://localhost:4200"));
+                            cors.setAllowedMethods(java.util.List.of("*"));
+                            cors.setAllowedHeaders(java.util.List.of("*"));
+                            cors.setAllowCredentials(true);
+                            cors.setMaxAge(3600L);
+                            return cors;
+                        }))
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(unauthorizedRequestHandler))
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers(
+                                "/api/v1/students",
                                 "/api/v1/authentication/**",
                                 "/api/v1/crops/**",
                                 "/v3/api-docs/**",

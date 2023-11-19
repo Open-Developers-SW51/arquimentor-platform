@@ -5,8 +5,8 @@ import com.arquimentor.platform.arquimentor.domain.model.valueobjects.UserProfil
 
 public record UpdateStudentProfileResource(
         String nick,
-        String phonenumber,
+        String phoneNumber,
         String slogan,
-       String userprofilephoto
+       String userProfilePhoto
 ) {
 }

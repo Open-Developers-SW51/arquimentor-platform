@@ -3,6 +3,7 @@ package com.arquimentor.platform.arquimentor.domain.services;
 
 import com.arquimentor.platform.arquimentor.domain.model.aggregates.StudentProfile;
 import com.arquimentor.platform.arquimentor.domain.model.commands.CreateStudentProfileCommand;
+import com.arquimentor.platform.arquimentor.domain.model.commands.DeletePublicationCommand;
 import com.arquimentor.platform.arquimentor.domain.model.commands.UpdateStudentProfileCommand;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface StudentProfileCommandService {
     Optional<StudentProfile> updateStudentProfileByID(UpdateStudentProfileCommand command);
 
 
-
+    void deletePublication(DeletePublicationCommand deletePublicationCommand);
 }

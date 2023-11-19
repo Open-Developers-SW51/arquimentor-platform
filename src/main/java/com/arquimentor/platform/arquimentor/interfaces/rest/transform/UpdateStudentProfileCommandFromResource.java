@@ -7,11 +7,11 @@ public class UpdateStudentProfileCommandFromResource {
     public static UpdateStudentProfileCommand toCommandFromResource(Long studentProfileId, UpdateStudentProfileResource resource) {
 
         return new UpdateStudentProfileCommand(
-                resource.nick(),
                 studentProfileId,
-                resource.phonenumber(),
+                resource.nick(),
+                resource.phoneNumber(),
                 resource.slogan(),
-                resource.userprofilephoto()
+                resource.userProfilePhoto()
         );
     }
 }
