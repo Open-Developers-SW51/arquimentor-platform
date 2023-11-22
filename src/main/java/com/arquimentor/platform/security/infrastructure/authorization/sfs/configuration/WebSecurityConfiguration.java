@@ -87,7 +87,7 @@ public class WebSecurityConfiguration {
                 .cors(corsConfigurer -> corsConfigurer
                         .configurationSource(request -> {
                             var cors = new org.springframework.web.cors.CorsConfiguration();
-                            cors.setAllowedOrigins(java.util.List.of("*"));
+                            cors.setAllowedOrigins(java.util.List.of("https://arquimentor-7e645.firebaseapp.com"));
                             cors.setAllowedMethods(java.util.List.of("*"));
                             cors.setAllowedHeaders(java.util.List.of("*"));
                             cors.setAllowCredentials(true);
