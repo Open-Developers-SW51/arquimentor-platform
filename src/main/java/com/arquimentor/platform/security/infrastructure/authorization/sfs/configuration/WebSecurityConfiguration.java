@@ -16,6 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableMethodSecurity
@@ -59,12 +64,30 @@ public class WebSecurityConfiguration {
     }
 
     @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+
+        configuration.setAllowedMethods(Arrays.asList("*"));
+
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+
+    }
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfigurer -> csrfConfigurer.disable())
                 .cors(corsConfigurer -> corsConfigurer
                         .configurationSource(request -> {
                             var cors = new org.springframework.web.cors.CorsConfiguration();
-                            cors.setAllowedOrigins(java.util.List.of("http://localhost:4200"));
+                            cors.setAllowedOrigins(java.util.List.of("*"));
                             cors.setAllowedMethods(java.util.List.of("*"));
                             cors.setAllowedHeaders(java.util.List.of("*"));
                             cors.setAllowCredentials(true);
@@ -93,3 +116,4 @@ public class WebSecurityConfiguration {
         return http.build();
     }
 }
+

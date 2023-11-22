@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/api/v1/studentprofiles", produces = MediaType.APPLICATION_JSON_VALUE)
 @Tag(name = "Student Profiles", description = "Student Profile Management Endpoints")
