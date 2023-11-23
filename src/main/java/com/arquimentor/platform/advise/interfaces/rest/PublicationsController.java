@@ -84,14 +84,14 @@ public class PublicationsController {
         return ResponseEntity.ok("Publication with given id successfully deleted");
     }
 
-    @PostMapping("/{publicationId}/incrementView")
+    @PostMapping("/{publicationId}/incrementedView")
     public ResponseEntity<?> incrementViewPublication(@PathVariable Long publicationId) {
         var incrementViewPublicationCommand = new IncrementViewPublicationCommand(publicationId);
         var incrementViewPublicationId = publicationCommandService.incrementView(incrementViewPublicationCommand);
         return ResponseEntity.ok(incrementViewPublicationId);
     }
 
-    @PostMapping("/{publicationId}/incrementLike")
+    @PostMapping("/{publicationId}/incrementedLike")
     public ResponseEntity<?> incrementLikePublication(@PathVariable Long publicationId) {
         var incrementLikePublicationCommand = new IncrementedLikePublicationCommand(publicationId);
         var incrementLikePublicationId = publicationCommandService.incrementLike(incrementLikePublicationCommand);
